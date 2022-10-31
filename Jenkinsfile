@@ -11,20 +11,7 @@ pipeline {
         test_cerdentials =
         prod_cerdentials =
     }
-
     stages {
-        stage ('Git Checkout') {
-            steps {
-                checkout([
-                    $class: 'GitSCM',
-                    branches: [[name: 'master']],
-                    doGenerateSubmoduleConfigurations: false,
-                    extensions: [[$class: 'CleanCheckout']],
-                    submoduleCfg: [],
-                    userRemoteConfigs: [[url: github_url]]
-                ])
-            }
-        }
         stage ('Build BE Image') {
             steps {
                 script {
@@ -54,25 +41,11 @@ pipeline {
             steps {
                script {
                 sshagent {
-                    sh """ssh -o StrictHostKeyChecking=no -l ec2user test curl 127.0.0.1:5000""" )
+                    sh """ssh -o StrictHostKeyChecking=no -l ec2user test mkdir linoy""" )
                     }
                 }
             }
         }
-        stage ('prod') {
-            steps {
-               script {
-
-                    }
-                }
-            }
-        }
-        stage ('Clean Memory') {
-            steps {
-                sh "docker rmi $dockerhub_registry:latest"
-            }
-        }
-    }
 
     post {
         always {
