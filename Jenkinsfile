@@ -16,7 +16,6 @@ pipeline {
             steps {
                 script {
                     dockerImage = docker.build dockerhub_registry + ":latest"
-                    }
                 }
             }
         }
@@ -50,3 +49,4 @@ pipeline {
                 }
             }
         }
+    }
