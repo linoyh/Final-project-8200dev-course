@@ -1,6 +1,9 @@
-# Attendance
+# Final Project - DevOps Bootcamp 
 
 Attendance is an app for calculate the Attendance time rates for the Devops 8200-dev-bynet course participants.
+
+## Technologies in use
+
 
 ## Installation
 cd into the docker-compose direcory location and write the command:
