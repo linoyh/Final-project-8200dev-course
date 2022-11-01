@@ -12,7 +12,7 @@ pipeline {
         //prod_cerdentials =
     }
     stages {
-        stage ('Build BE Image') {
+        stage('Build BE Image') {
             steps {
                 script {
                     dockerImage = docker.build dockerhub_registry + ":latest"
@@ -20,7 +20,7 @@ pipeline {
                 }
             }
         }
-        stage ('push to dockerhub') {
+        stage('push to dockerhub') {
             steps {
                script {
                     docker.withRegistry( '', dockerhub_credential) {
@@ -29,7 +29,7 @@ pipeline {
                 }
             }
         }
-        stage ('pull from dockerHub') {
+        stage('pull from dockerHub') {
             steps {
                script {
                     docker.withRegistry( '', dockerHubRegistryCredential ) {
@@ -38,7 +38,7 @@ pipeline {
                 }
             }
         }
-        stage ('test') {
+        stage('test') {
             steps {
                 sshagent(credentials: [test_cerdentials]) {
                     sh """
