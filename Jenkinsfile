@@ -9,7 +9,7 @@ pipeline {
         github_credential = 'a0bb4e47-f112-4b84-9e36-1fb1d2239d7e'
         github_url = 'https://github.com/linoyh/Attendance-project.git'
         test_cerdentials = 'jenkins-ec2-server-credentials'
-        prod_cerdentials =
+        //prod_cerdentials =
     }
     stages {
         stage ('Build BE Image') {
