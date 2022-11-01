@@ -39,19 +39,14 @@ pipeline {
         }
         stage ('test') {
             steps {
-               script {
-                sshagent {
-                    sh """ssh -o StrictHostKeyChecking=no -l ec2user test mkdir linoy""" )
-                    }
+                sshagent(credentials: ['jenkins-ec2-server-credentials']) {
+                    sh """
+                        echo 'test server in action'
+                        ssh -o StrictHostKeyChecking=no -i /home/ec2-user/.ssh/jenkins-git
+                        bash -x deploy.sh test
+                        """
                 }
             }
-        }
-
-    post {
-        always {
-            emailext to: "linoyhevron@gmail.com",
-                     subject: "Jenkins build: ${currentBuild.currentResult}: ${env.JOB_NAME}",
-                     body: "${currentBuild.currentResult}: Job ${env.JOB_NAME}\nMore Info can be found here: ${env.BUILD_URL}"
         }
     }
 }
