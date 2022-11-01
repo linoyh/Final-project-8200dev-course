@@ -10,12 +10,13 @@ pipeline {
         github_url = 'https://github.com/linoyh/Attendance-project.git'
         test_cerdentials = 'jenkins-ec2-server-credentials'
         prod_cerdentials =
-        }
+    }
     stages {
         stage ('Build BE Image') {
             steps {
                 script {
                     dockerImage = docker.build dockerhub_registry + ":latest"
+                    }
                 }
             }
         }
@@ -45,8 +46,7 @@ pipeline {
                         ssh -o StrictHostKeyChecking=no -i /home/ec2-user/.ssh/jenkins-git
                         bash -x deploy.sh test
                         """
+                    }
                 }
             }
         }
-    }
-}
