@@ -2,7 +2,8 @@
 
 Attendance is an app for calculate the Attendance time rates for the Devops 8200-dev-bynet course participants.
 
-## Technologies in use
+## Technologies in use:
+docker, virtualbox, 
 
 
 ## Installation

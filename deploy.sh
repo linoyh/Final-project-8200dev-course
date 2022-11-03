@@ -13,23 +13,27 @@ SECRET_KEY="${HOME_DIR}/.ssh/jenkins-git"
 machine=$1
 
 #ptints wheather I deploy to test or prod
-echo "deloy to $machine"
+echo "Deploying to $machine starting"
 
-echo "creating project dir"
+#creating final-project dir on the test server
+echo "creatinf ginal-project dir in $machine machine"
+ssh -i "${SECRET_KEY}" -o StrictHostKeyChecking=no ec2-user@${machine} "mkdir -p ${HOME_DIR}/final-project-linoy-bynet"
+# ssh -i .ssh/jenkins-git -o StrictHostKeyChecking=no ec2-user@172.31.84.178 mkdir /home/ec2-user/final-project
 
-ssh -i "${SECRET_KEY}" -o StrictHostKeyChecking=no ${machine} "mkdir -p ${HOME_DIR}/final-project"
+#copy docker-compose.yaml file to machine final-project dir using scp
+echo "copying docker-compose file to $machine"
+scp -i "${SECRET_KEY}" "${JENKINS_PIPELINE_WORKSPACE}/docker-compose.yaml"  "${machine}:${HOME_DIR}/final-project-linoy-bynet"
 
-echo "copying compose file to $machine"
+#ssh to the $machine (test ot prod) and bring the application up, the EOF enable run multiple commands via ssh in the remote server
+ssh -i "${SECRET_KEY}" -o StrictHostKeyChecking=no ec2-user@${machine} << EOF
+cd $HOME_DIR/final-project-linoy-bynet
+docker-compose -f docker-compose.yaml up --build
+EOF
 
-echo "Deploying to production server"
+echo "Deploying to $machine server succedded"
 
 
 scp -i "${SECRET_KEY}" "${JENKINS_PIPELINE_WORKSPACE}/docker-compose.yaml"  "${machine}:${HOME_DIR}/final-project"
 echo "starting project"
-
-ssh -i /home/ec2-user/.ssh/id_dsa $USER@$machine "cd $HOME_DIR/Flask-app-AWS && docker-compose up"
-
-scp -i /home/ec2-user/.ssh/id_dsa -r /var/lib/jenkins/workspace/* ec2-user@prod:~
-ssh -i /home/ec2-user/.ssh/id_dsa $USER@$machine "cd $HOME_DIR/Flask-app-AWS && docker-compose up"
 
 

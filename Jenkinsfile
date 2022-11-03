@@ -28,22 +28,11 @@ pipeline {
                 }
             }
         }
-        stage('pull from dockerHub') {
-            steps {
-               script {
-                    docker.withRegistry( '', dockerHubRegistryCredential ) {
-                        dockerImage.pull()
-                    }
-                }
-            }
-        }
         stage('test') {
             steps {
                 sshagent(credentials: [test_cerdentials]) {
                     sh """
                         echo 'connecting to test derver'
-
-                        ssh -o StrictHostKeyChecking=no -i /home/ec2-user/.ssh/jenkins-git
                         bash -x deploy.sh test
                         """
                     }
