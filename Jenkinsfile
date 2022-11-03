@@ -19,15 +19,6 @@ pipeline {
                 }
             }
         }
-        stage('push to dockerhub') {
-            steps {
-               script {
-                    docker.withRegistry( '', dockerhub_credential) {
-                        dockerImage.push()
-                    }
-                }
-            }
-        }
         stage('test') {
             steps {
                 sshagent(credentials: [test_cerdentials]) {
@@ -35,6 +26,15 @@ pipeline {
                         echo 'connecting to test server'
                         bash -x deploy.sh test
                         """
+                    }
+                }
+            }
+            stage('push to dockerhub') {
+                steps {
+                    script {
+                        docker.withRegistry( '', dockerhub_credential) {
+                            dockerImage.push()
+                        }
                     }
                 }
             }
