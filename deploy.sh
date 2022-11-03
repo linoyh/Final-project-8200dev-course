@@ -32,10 +32,8 @@ EOF
 
 echo "Deploying to $machine server succedded"
 
-if [ $machine == "test" ]
-then
-      curl http://localhost:5000
-scp -i "${SECRET_KEY}" "${JENKINS_PIPELINE_WORKSPACE}/docker-compose.yaml"  "${machine}:${HOME_DIR}/final-project"
-echo "starting project"
+#if [ $machine == "test" ]
+#then
+
 
 
