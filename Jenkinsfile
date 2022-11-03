@@ -32,7 +32,7 @@ pipeline {
             steps {
                script {
                     docker.withRegistry( '', dockerHubRegistryCredential ) {
-                        dockerImage.push()
+                        dockerImage.pull()
                     }
                 }
             }
@@ -41,7 +41,8 @@ pipeline {
             steps {
                 sshagent(credentials: [test_cerdentials]) {
                     sh """
-                        echo 'test server in action'
+                        echo 'connecting to test derver'
+
                         ssh -o StrictHostKeyChecking=no -i /home/ec2-user/.ssh/jenkins-git
                         bash -x deploy.sh test
                         """

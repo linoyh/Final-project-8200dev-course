@@ -6,13 +6,15 @@
 
 # Gobal Variables
 HOME_DIR="/home/ec2-user"
-JENKINS_PIPELINE_WORKSPACE="/var/lib/jenkins/workspace/final-project"
+JENKINS_PIPELINE_WORKSPACE="/var/lib/jenkins/workspace/final-project-8200dev"
 SECRET_KEY="${HOME_DIR}/.ssh/jenkins-git"
 
-#takes the first argument inserted to the script
+#takes the first argument ($1) check if it is test or prod machine
 machine=$1
 
+#ptints wheather I deploy to test or prod
 echo "deloy to $machine"
+
 echo "creating project dir"
 
 ssh -i "${SECRET_KEY}" -o StrictHostKeyChecking=no ${machine} "mkdir -p ${HOME_DIR}/final-project"
@@ -29,3 +31,5 @@ ssh -i /home/ec2-user/.ssh/id_dsa $USER@$machine "cd $HOME_DIR/Flask-app-AWS && 
 
 scp -i /home/ec2-user/.ssh/id_dsa -r /var/lib/jenkins/workspace/* ec2-user@prod:~
 ssh -i /home/ec2-user/.ssh/id_dsa $USER@$machine "cd $HOME_DIR/Flask-app-AWS && docker-compose up"
+
+
