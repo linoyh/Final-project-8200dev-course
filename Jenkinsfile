@@ -15,7 +15,7 @@ pipeline {
         stage('Build BE Image') {
             steps {
                 script {
-                    dockerImage = docker.build("app-image, "/var/lib/jenkins/workspace/final-project-8200dev/app") dockerhub_registry + ":latest"
+                    dockerImage = docker.build("app-image, "/var/lib/jenkins/workspace/\final-project-8200dev/app") dockerhub_registry + ":latest"
                 }
             }
         }
