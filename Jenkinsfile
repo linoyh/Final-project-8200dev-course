@@ -7,7 +7,7 @@ pipeline {
         dockerhub_credential = credentials('dockerhub')
         dockerImage = ''
         github_credential = 'a0bb4e47-f112-4b84-9e36-1fb1d2239d7e'
-        github_url = 'https://github.com/linoyh/Attendance-project.git'
+        github_url = 'https://github.com/linoyh/Final-project-8200dev-course'
         test_cerdentials = 'jenkins-ec2-server-credentials'
         //prod_cerdentials =
     }
@@ -15,7 +15,7 @@ pipeline {
         stage('Build BE Image') {
             steps {
                 script {
-                    dockerImage = docker.build dockerhub_registry + ":latest"
+                    dockerImage = docker.build("app-image, "/var/lib/jenkins/workspace/final-project-8200dev/app") dockerhub_registry + ":latest"
                 }
             }
         }
@@ -32,7 +32,7 @@ pipeline {
             steps {
                 sshagent(credentials: [test_cerdentials]) {
                     sh """
-                        echo 'connecting to test derver'
+                        echo 'connecting to test server'
                         bash -x deploy.sh test
                         """
                     }
