@@ -29,6 +29,8 @@ pipeline {
                     }
                 }
             }
+            //docker login
+            // docker push 6419/attendance_app_bynet:app-image
             stage('push to dockerhub') {
                 steps {
                     script {

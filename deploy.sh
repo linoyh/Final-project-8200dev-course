@@ -15,7 +15,7 @@ machine=$1
 #ptints wheather I deploy to test or prod
 echo "Deploying to $machine starting"
 
-#creating final-project dir on the test server
+#creating final-project dir on the test or prod server via ssh
 echo "creatinf ginal-project dir in $machine machine"
 ssh -i "${SECRET_KEY}" -o StrictHostKeyChecking=no ec2-user@${machine} "mkdir -p ${HOME_DIR}/final-project-linoy-bynet"
 # ssh -i .ssh/jenkins-git -o StrictHostKeyChecking=no ec2-user@172.31.84.178 mkdir /home/ec2-user/final-project
@@ -27,13 +27,15 @@ scp -i "${SECRET_KEY}" "${JENKINS_PIPELINE_WORKSPACE}/docker-compose.yaml"  "${m
 #ssh to the $machine (test ot prod) and bring the application up, the EOF enable run multiple commands via ssh in the remote server
 ssh -i "${SECRET_KEY}" -o StrictHostKeyChecking=no ec2-user@${machine} << EOF
 cd $HOME_DIR/final-project-linoy-bynet
-docker-compose -f docker-compose.yaml up --build
+docker-compose up --build
 EOF
 
 echo "Deploying to $machine server succedded"
 
+#check if the current server is test. if does run test.sh script (exist in jenkins server) on the test server
 #if [ $machine == "test" ]
 #then
-
+  #scp -i "${SECRET_KEY}" "${JENKINS_PIPELINE_WORKSPACE}/test.sh"  "${machine}:${HOME_DIR}/final-project-linoy-bynet"
+  #ssh -i "${SECRET_KEY}" -o StrictHostKeyChecking=no ec2-user@${machine} 'bash -s' < "${JENKINS_PIPELINE_WORKSPACE}/test.sh"
 
 

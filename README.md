@@ -3,7 +3,7 @@
 Attendance is an app for calculate the Attendance time rates for the Devops 8200-dev-bynet course participants.
 
 ## Technologies in use:
-docker, virtualbox, 
+Docker, Virtualbox, Flask, Jenkins 
 
 
 ## Installation
@@ -26,11 +26,22 @@ activated by the docker file "CMD ["python3", "./app.py"]"
 
 attached to templates directory which contain index.html - our frontend to present the project nicely in the browser
 activate 3 scripts:
-* sftp_csv.py- takes all the csv files fron the remote course machine into the db container
-* attendance.py -the main backend script - 
-* import_csv_to_db1.py - import the final csv file - the final result of the attendance script to the db
+####* sftp_csv.py- 
+takes all the csv files fron the remote course machine into the db container
+####* attendance.py-
+the main backend script - sum all attendance duration for identical users shown with differant names in all the csv files, calc the % of appearance for each user, write the final csv file to a db table.
+####* import_csv_to_db1.py - 
+import the final csv file - the final result of the attendance script to the db
 
 
 #### .env file
-contain  environment variables for all the scripts and logics 
+Contain  environment variables for all the scripts and logics 
 
+#### deploy.sh 
+Usage: deploy.sh [test|prod]
+
+This script deploys the project to test and prod servers 
+creating final-project dir on the test or prod server via ssh
+copy docker-compose.yaml file to machine final-project dir using scp
+ssh to the $machine (test ot prod) and bring the application up
+check if the current server is test. if does copy the test.sh script to the project dir and runs it
