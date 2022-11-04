@@ -16,17 +16,19 @@ machine=$1
 echo "Deploying to $machine starting"
 
 #creating final-project dir on the test or prod server via ssh
-echo "creatinf ginal-project dir in $machine machine"
-ssh -i "${SECRET_KEY}" -o StrictHostKeyChecking=no ec2-user@${machine} "mkdir -p ${HOME_DIR}/final-project-linoy-bynet"
+echo "creating ginal-project dir in $machine machine"
+scp -o StrictHostKeyChecking=no -r "$JENKINS_PIPELINE_WORKSPACE/*" ec2-user@test:~
+#ssh -i "${SECRET_KEY}" -o StrictHostKeyChecking=no ec2-user@${machine} "mkdir -p ${HOME_DIR}/final-project-linoy-bynet"
 # ssh -i .ssh/jenkins-git -o StrictHostKeyChecking=no ec2-user@172.31.84.178 mkdir /home/ec2-user/final-project
 
 #copy docker-compose.yaml file to machine final-project dir using scp
-echo "copying docker-compose file to $machine"
-scp -i "${SECRET_KEY}" "${JENKINS_PIPELINE_WORKSPACE}/docker-compose.yaml"  "${machine}:${HOME_DIR}/final-project-linoy-bynet"
+#echo "copying docker-compose file to $machine"
+#scp -i "${SECRET_KEY}" "${JENKINS_PIPELINE_WORKSPACE}/docker-compose.yaml"  "${machine}:${HOME_DIR}/final-project-linoy-bynet"
 
 #ssh to the $machine (test ot prod) and bring the application up, the EOF enable run multiple commands via ssh in the remote server
-ssh -i "${SECRET_KEY}" -o StrictHostKeyChecking=no ec2-user@${machine} << EOF
-cd $HOME_DIR/final-project-linoy-bynet
+#ssh -i "${SECRET_KEY}" -o StrictHostKeyChecking=no ec2-user@${machine} << EOF
+ssh -o StrictHostKeyChecking=no ec2-user@${machine} << EOF
+cd /home/ec2-user/final-project-linoy-bynet
 docker-compose up --build
 EOF
 
