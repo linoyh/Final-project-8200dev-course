@@ -27,9 +27,10 @@ scp -o StrictHostKeyChecking=no -r "$JENKINS_PIPELINE_WORKSPACE" ec2-user@test:~
 
 #ssh to the $machine (test ot prod) and bring the application up, the EOF enable run multiple commands via ssh in the remote server
 #ssh -i "${SECRET_KEY}" -o StrictHostKeyChecking=no ec2-user@${machine} << EOF
-ssh -o StrictHostKeyChecking=no ec2-user@${machine} << EOF
-cd /home/ec2-user/final-project-8200dev
-docker-compose up --build
+ssh -o StrictHostKeyChecking=no ec2-user@${machine}
+<< EOF
+  cd /home/ec2-user/final-project-8200dev/
+  docker-compose up --build
 EOF
 
 echo "Deploying to $machine server succedded"
