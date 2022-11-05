@@ -16,7 +16,8 @@ services:
     links:
       - db
     deploy:
-      restart_policy: always
+      restart_policy:
+        condition: always
 
   db:
     image: mysql:latest
