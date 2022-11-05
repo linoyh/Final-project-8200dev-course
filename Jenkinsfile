@@ -6,6 +6,7 @@ pipeline {
         dockerhub_registry = '6419/attendance_app_bynet'
         dockerhub_credential = credentials('dockerhub')
         dockerImage = ''
+        dockerTagImage = ''
         github_credential = 'a0bb4e47-f112-4b84-9e36-1fb1d2239d7e'
         github_url = 'https://github.com/linoyh/Final-project-8200dev-course'
         test_cerdentials = 'jenkins-ec2-server-credentials'
