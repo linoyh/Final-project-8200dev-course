@@ -41,7 +41,7 @@ Contain  environment variables for all the scripts and logics
 Usage: deploy.sh [test|prod]
 
 This script deploys the project to test and prod servers 
-creating final-project dir on the test or prod server via ssh
+copy final-project dir on the test or prod server via ssh by scp
 copy docker-compose.yaml file to machine final-project dir using scp
 ssh to the $machine (test ot prod) and bring the application up
 check if the current server is test. if does copy the test.sh script to the project dir and runs it

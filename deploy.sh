@@ -15,7 +15,7 @@ machine=$1
 #ptints wheather I deploy to test or prod
 echo "Deploying to $machine starting"
 
-#creating final-project dir on the test or prod server via ssh
+#copy final-project dir on the test or prod server via ssh by scp
 echo "creating final-project dir in $machine machine"
 scp -o StrictHostKeyChecking=no -r "$JENKINS_PIPELINE_WORKSPACE" ec2-user@test:~
 #ssh -i "${SECRET_KEY}" -o StrictHostKeyChecking=no ec2-user@${machine} "mkdir -p ${HOME_DIR}/final-project-linoy-bynet"
