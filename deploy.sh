@@ -21,27 +21,26 @@ scp -o StrictHostKeyChecking=no -r "$JENKINS_PIPELINE_WORKSPACE" ec2-user@test:~
 #ssh -i "${SECRET_KEY}" -o StrictHostKeyChecking=no ec2-user@${machine} "mkdir -p ${HOME_DIR}/final-project-linoy-bynet"
 # ssh -i .ssh/jenkins-git -o StrictHostKeyChecking=no ec2-user@172.31.84.178 mkdir /home/ec2-user/final-project
 
-#copy docker-compose.yaml file to machine final-project dir using scp
-#echo "copying docker-compose file to $machine"
-#scp -i "${SECRET_KEY}" "${JENKINS_PIPELINE_WORKSPACE}/docker-compose.yaml"  "${machine}:${HOME_DIR}/final-project-linoy-bynet"
 
 #ssh to the $machine (test ot prod):
 # copy the .env.py file (I created manually becuse I have not upload it to git) to the project dir
 # bring the application up
 # the EOF enable run multiple commands via ssh in the remote server
-ssh -o StrictHostKeyChecking=no ec2-user@${machine} "cp .env.py final-project-8200dev/ && cd /home/ec2-user/final-project-8200dev/ && docker-compose up --build"
-#<< EOF
-#  cp .env.py final-project-8200dev/
-#  cd /home/ec2-user/final-project-8200dev/
-#  docker-compose up --build
-#EOF
+ssh -o StrictHostKeyChecking=no ec2-user@${machine} #"cp .env.py final-project-8200dev/ && cd /home/ec2-user/final-project-8200dev/ && docker-compose up --build && curl http://127.0.0.1:5000"
+<< EOF
+  cp .env.py final-project-8200dev/
+  cd /home/ec2-user/final-project-8200dev/
+  docker-compose up --build
+  sleep 15
+  curl http://127.0.0.1:5000
+  ./cleanup 
+EOF
 
 echo "Deploying to $machine server succedded"
 
-#check if the current server is test. if does run test.sh script (exist in jenkins server) on the test server
-#if [ $machine == "test" ]
-#then
-  #scp -i "${SECRET_KEY}" "${JENKINS_PIPELINE_WORKSPACE}/test.sh"  "${machine}:${HOME_DIR}/final-project-linoy-bynet"
-  #ssh -i "${SECRET_KEY}" -o StrictHostKeyChecking=no ec2-user@${machine} 'bash -s' < "${JENKINS_PIPELINE_WORKSPACE}/test.sh"
+#check if the current server is test. if does run test.sh script on the test server
+if [ $machine == "test" ]
+then
+  ssh -i "${SECRET_KEY}" -o StrictHostKeyChecking=no ec2-user@${machine} './test.sh"
 
 
