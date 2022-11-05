@@ -15,7 +15,9 @@ pipeline {
         stage('Build BE Image') {
             steps {
                 script {
-                    dockerImage = docker.build(dockerhub_registry:${env.BUILD_ID}, "./app")
+                    //dockerImage = docker.build(dockerhub_registry:${env.BUILD_ID}, "./app")
+                    dockerImage = docker.build(dockerhub_registry + "latest", "./app")
+                    dockerTagImage = docker.build(dockerHubRegistry + ":${BUILD_NUMBER}", "./app")
                 }
             }
         }
