@@ -27,13 +27,13 @@ scp -o StrictHostKeyChecking=no -r "$JENKINS_PIPELINE_WORKSPACE" ec2-user@test:~
 # bring the application up
 # the EOF enable run multiple commands via ssh in the remote server
 ssh -o StrictHostKeyChecking=no ec2-user@${machine} #"cp .env.py final-project-8200dev/ && cd /home/ec2-user/final-project-8200dev/ && docker-compose up --build && curl http://127.0.0.1:5000"
-<< EOF
-  cp .env.py final-project-8200dev/
-  cd /home/ec2-user/final-project-8200dev/
-  docker-compose up --build
-  sleep 15
-  curl http://127.0.0.1:5000
-  ./cleanup 
+<< 'EOF'
+    cp .env.py final-project-8200dev/
+    cd /home/ec2-user/final-project-8200dev/
+    docker-compose up --build
+    sleep 15
+    curl http://127.0.0.1:5000
+    ./cleanup
 EOF
 
 echo "Deploying to $machine server succedded"
