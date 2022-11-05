@@ -25,13 +25,16 @@ scp -o StrictHostKeyChecking=no -r "$JENKINS_PIPELINE_WORKSPACE" ec2-user@test:~
 #echo "copying docker-compose file to $machine"
 #scp -i "${SECRET_KEY}" "${JENKINS_PIPELINE_WORKSPACE}/docker-compose.yaml"  "${machine}:${HOME_DIR}/final-project-linoy-bynet"
 
-#ssh to the $machine (test ot prod) and bring the application up, the EOF enable run multiple commands via ssh in the remote server
-#ssh -i "${SECRET_KEY}" -o StrictHostKeyChecking=no ec2-user@${machine} << EOF
-ssh -o StrictHostKeyChecking=no ec2-user@${machine} "cd /home/ec2-user/final-project-8200dev/ && docker-compose up --build"
-#<< EOF
-#  cd /home/ec2-user/final-project-8200dev/
-#  docker-compose up --build
-#EOF
+#ssh to the $machine (test ot prod):
+# copy the .env.py file (I created manually becuse I have not upload it to git) to the project dir
+# bring the application up
+# the EOF enable run multiple commands via ssh in the remote server
+ssh -o StrictHostKeyChecking=no ec2-user@${machine}
+<< EOF
+  cp .env.py /home/ec2-user/final-project-8200dev/
+  cd /home/ec2-user/final-project-8200dev/
+  docker-compose up --build
+EOF
 
 echo "Deploying to $machine server succedded"
 
