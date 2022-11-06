@@ -17,7 +17,7 @@ pipeline {
                 script {
                     //dockerImage = docker.build(dockerhub_registry:${env.BUILD_ID}, "./app")
                     dockerImage = docker.build(dockerhub_registry + ":latest", "./app")
-                    dockerTagImage = docker.build(dockerHubRegistry + ":${BUILD_NUMBER}", "./app")
+                    dockerTagImage = docker.build(dockerhub_registry + ":${BUILD_NUMBER}", "./app")
                     //dockerTagImage = docker.build(dockerHubRegistry + ":${env.BUILD_NUMBER}", "./app")
                 }
             }
