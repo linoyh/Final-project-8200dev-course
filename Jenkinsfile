@@ -22,7 +22,7 @@ pipeline {
                 }
             }
         }
-        stage('test') {
+        stage('Test') {
             steps {
                 sshagent(credentials: [test_cerdentials]) {
                     sh """
@@ -34,7 +34,7 @@ pipeline {
             }
             //docker login
             // docker push 6419/attendance_app_bynet:app-image
-            stage('push to dockerhub') {
+            stage('Push to dockerhub') {
                 steps {
                     script {
                         docker.withRegistry( '', dockerhub_credential) {
