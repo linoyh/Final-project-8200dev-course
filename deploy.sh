@@ -16,8 +16,8 @@ machine=$1
 echo "Deploying to $machine starting"
 
 #copy final-project dir on the test or prod server by scp
-echo "creating final-project dir in $machine machine"
-scp -o StrictHostKeyChecking=no -r "$JENKINS_PIPELINE_WORKSPACE" ec2-user@test:~
+echo "copying final-project dir in $machine machine"
+scp -o StrictHostKeyChecking=no -r "$JENKINS_PIPELINE_WORKSPACE" ec2-user@${machine}:~
 #ssh -i "${SECRET_KEY}" -o StrictHostKeyChecking=no ec2-user@${machine} "mkdir -p ${HOME_DIR}/final-project-linoy-bynet"
 # ssh -i .ssh/jenkins-git -o StrictHostKeyChecking=no ec2-user@172.31.84.178 mkdir /home/ec2-user/final-project
 
