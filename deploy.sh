@@ -34,7 +34,7 @@ ssh -o StrictHostKeyChecking=no ec2-user@${machine} << 'EOF'
   cd /home/ec2-user/final-project-8200dev/
   docker-compose up --build -d
   sleep 20
-  if [ $machine -eq "test" ];
+  if [ "$machine" -eq "test" ];
   then
       http_status = `curl --write-out "%{http_code}\n" --silent --output /dev/null "http://127.0.0.1:5000"`
       if [ $http_status -eq 200 ];
