@@ -4,7 +4,7 @@ pipeline {
 
     environment {
         dockerhub_registry = '6419/attendance_app_bynet'
-        dockerhub_credential = credentials('dockerhub')
+        dockerhub_credential = 'dockerhub'
         dockerImage = ''
         dockerTagImage = ''
         github_credential = 'a0bb4e47-f112-4b84-9e36-1fb1d2239d7e'
