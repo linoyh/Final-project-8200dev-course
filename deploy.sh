@@ -15,7 +15,7 @@ machine=$1
 #ptints wheather I deploy to test or prod
 echo "Deploying to $machine starting"
 
-#copy final-project dir on the test or prod server via ssh by scp
+#copy final-project dir on the test or prod server by scp
 echo "creating final-project dir in $machine machine"
 scp -o StrictHostKeyChecking=no -r "$JENKINS_PIPELINE_WORKSPACE" ec2-user@test:~
 #ssh -i "${SECRET_KEY}" -o StrictHostKeyChecking=no ec2-user@${machine} "mkdir -p ${HOME_DIR}/final-project-linoy-bynet"
@@ -26,14 +26,14 @@ scp -o StrictHostKeyChecking=no -r "$JENKINS_PIPELINE_WORKSPACE" ec2-user@test:~
 # copy the .env.py file (I created manually becuse I have not upload it to git) to the project dir
 # bring the application up
 # the EOF enable run multiple commands via ssh in the remote server
-ssh -o StrictHostKeyChecking=no ec2-user@${machine} #"cp .env.py final-project-8200dev/ && cd /home/ec2-user/final-project-8200dev/ && docker-compose up --build -d && curl http://127.0.0.1:5000"
+#"cp .env.py final-project-8200dev/ && cd /home/ec2-user/final-project-8200dev/ && docker-compose up --build -d && curl http://127.0.0.1:5000"
 
-<< 'EOF'
-    cp .env.py final-project-8200dev/
-    cd /home/ec2-user/final-project-8200dev/
-    docker-compose up --build -d
-    sleep 15
-    curl http://127.0.0.1:5000
+ssh -o StrictHostKeyChecking=no ec2-user@${machine} << 'EOF'
+  cp .env.py final-project-8200dev/
+  cd /home/ec2-user/final-project-8200dev/
+  docker-compose up --build -d
+  sleep 15
+  curl http://127.0.0.1:5000
 EOF
 
 echo "Deploying to $machine server succedded"
