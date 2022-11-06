@@ -6,7 +6,7 @@ services:
     build: ./app
     ports:
       #left- local server : right: flask
-      - '5000:5000'
+      - "5000:5000"
     working_dir: /app
     # defining the environmental environments for mysql
     env_file: ./.env.py
@@ -24,7 +24,7 @@ services:
     env_file: ./.env.py
     ports:
       # <Port exposed> : < MySQL Port running inside container>
-      - '3307:3306'
+      - "3307:3306"
     expose:
       # Opens port 3306 on the container
       - '3306'
