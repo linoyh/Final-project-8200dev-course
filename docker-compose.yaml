@@ -27,7 +27,7 @@ services:
       - "3307:3306"
     expose:
       # Opens port 3306 on the container
-      - '3306'
+      - "3306"
       # create a read only vol in the docker containet
     volumes:
       - ./db:/docker-entrypoint-initdb.d/:ro
