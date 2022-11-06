@@ -10,14 +10,14 @@ JENKINS_PIPELINE_WORKSPACE="/var/lib/jenkins/workspace/final-project-8200dev"
 SECRET_KEY="${HOME_DIR}/.ssh/jenkins-git"
 
 #takes the first argument ($1) check if it is test or prod machine
-machine=$1
+MACHINE=$1
 
 #ptints wheather I deploy to test or prod
 echo "Deploying to $machine starting"
 
 #copy final-project dir on the test or prod server by scp
-echo "copying final-project dir in $machine machine"
-scp -o StrictHostKeyChecking=no -r "$JENKINS_PIPELINE_WORKSPACE" ec2-user@${machine}:~
+echo "copying final-project dir in $MACHINE machine"
+scp -o StrictHostKeyChecking=no -r "$JENKINS_PIPELINE_WORKSPACE" ec2-user@${MACHINE}:~
 #ssh -i "${SECRET_KEY}" -o StrictHostKeyChecking=no ec2-user@${machine} "mkdir -p ${HOME_DIR}/final-project-linoy-bynet"
 # ssh -i .ssh/jenkins-git -o StrictHostKeyChecking=no ec2-user@172.31.84.178 mkdir /home/ec2-user/final-project
 
@@ -29,24 +29,26 @@ scp -o StrictHostKeyChecking=no -r "$JENKINS_PIPELINE_WORKSPACE" ec2-user@${mach
 #"cp .env.py final-project-8200dev/ && cd /home/ec2-user/final-project-8200dev/ && docker-compose up --build -d && curl http://127.0.0.1:5000"
 
 
-ssh -o StrictHostKeyChecking=no ec2-user@${machine} << 'EOF'
+ssh -o StrictHostKeyChecking=no ec2-user@${MACHINE} << 'EOF'
   cp .env.py final-project-8200dev/
   cd /home/ec2-user/final-project-8200dev/
   docker-compose up --build -d
   sleep 20
-  if [ "$machine" -eq "test" ];
+  if [ "$MACHINE" == "test" ];
   then
-      http_status = `curl --write-out "%{http_code}\n" --silent --output /dev/null "http://127.0.0.1:5000"`
-      if [ "$http_status" -eq 200 ];
+      HTTP=`curl --write-out "%{http_code}\n" --silent --output /dev/null "http://127.0.0.1:5000"`
+      echo $HTTP
+      if [ "$HTTP" == "200" ];
       then
-        echo "Test succedded"
+  echo "Test succedded"
       else
-        echo "Test failed"
+  echo "Test failed"
       fi
   fi
+  docker-compose dowm
 EOF
 
-echo "Deploying to $machine server succedded"
+echo "Deploying to $MACHINE server succedded"
 
 #check if the current server is test. if does run test.sh script on the test server
 #if [ $machine == "test" ]
