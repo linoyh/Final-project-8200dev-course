@@ -30,7 +30,7 @@ scp -o StrictHostKeyChecking=no -r "$JENKINS_PIPELINE_WORKSPACE" ec2-user@test:~
 ssh -o StrictHostKeyChecking=no ec2-user@${machine} << 'EOF'
     cp .env.py final-project-8200dev/
     cd /home/ec2-user/final-project-8200dev/
-    docker-compose up --build
+    docker-compose up --build -d
     sleep 15
     curl http://127.0.0.1:5000
     ./cleanup
