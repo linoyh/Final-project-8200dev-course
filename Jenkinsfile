@@ -6,7 +6,7 @@ pipeline {
         dockerhub_registry = '6419/attendance_app_bynet'
         dockerhub_credential = credentials('dockerhub')
         dockerImage = ''
-        //dockerTagImage = ''
+        dockerTagImage = ''
         github_credential = 'a0bb4e47-f112-4b84-9e36-1fb1d2239d7e'
         github_url = 'https://github.com/linoyh/Final-project-8200dev-course'
         jenkins_cerdentials_private_key = 'jenkins-ec2-server-credentials'
@@ -17,11 +17,12 @@ pipeline {
                 script {
                     //dockerImage = docker.build(dockerhub_registry:${env.BUILD_ID}, "./app")
                     dockerImage = docker.build(dockerhub_registry + ":latest", "./app")
+                    dockerTagImage = docker.build(dockerHubRegistry + ":${BUILD_NUMBER}", "./app")
                     //dockerTagImage = docker.build(dockerHubRegistry + ":${env.BUILD_NUMBER}", "./app")
                 }
             }
         }
-        stage('Test') {
+        stage('Deploy to Test') {
             steps {
                 sshagent(credentials: [jenkins_cerdentials_private_key]) {
                     sh """
@@ -38,6 +39,7 @@ pipeline {
                     script {
                         docker.withRegistry( '', dockerhub_credential) {
                             dockerImage.push()
+                            dockerTagImage.push()
                         }
                     }
                 }
