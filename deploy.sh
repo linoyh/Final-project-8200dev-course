@@ -33,7 +33,6 @@ ssh -o StrictHostKeyChecking=no ec2-user@${machine} << 'EOF'
     docker-compose up --build -d
     sleep 15
     curl http://127.0.0.1:5000
-    ./cleanup
 EOF
 
 echo "Deploying to $machine server succedded"
