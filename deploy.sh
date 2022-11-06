@@ -45,7 +45,6 @@ ssh -o StrictHostKeyChecking=no ec2-user@${MACHINE} << 'EOF'
   echo "Test failed"
       fi
   fi
-  docker-compose down
 EOF
 
 echo "Deploying to $MACHINE server succedded"
