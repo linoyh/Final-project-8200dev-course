@@ -28,12 +28,22 @@ scp -o StrictHostKeyChecking=no -r "$JENKINS_PIPELINE_WORKSPACE" ec2-user@${mach
 # the EOF enable run multiple commands via ssh in the remote server
 #"cp .env.py final-project-8200dev/ && cd /home/ec2-user/final-project-8200dev/ && docker-compose up --build -d && curl http://127.0.0.1:5000"
 
+
 ssh -o StrictHostKeyChecking=no ec2-user@${machine} << 'EOF'
   cp .env.py final-project-8200dev/
   cd /home/ec2-user/final-project-8200dev/
   docker-compose up --build -d
-  sleep 15
-  curl http://127.0.0.1:5000
+  sleep 20
+  if [ $machine == "test" ];
+  then
+      http_status = `curl --write-out "%{http_code}\n" --silent --output /dev/null "http://127.0.0.1:5000"`
+      if [ $http_status -eq 200 ];
+      then
+        echo "Test succedded"
+      else
+        echo "Test failed"
+      fi
+  fi
 EOF
 
 echo "Deploying to $machine server succedded"
