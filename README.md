@@ -7,21 +7,31 @@ Attendance is an app for calculate the Attendance time rates for the Devops 8200
 
 - [![Mysql][mysql.dev]][mysql-url]
 - [![Flask][flask.dev]][flask-url]
+- [![Dcker][docker.dev]][docker-url]
+- [![Aws][aws.dev]][aws-url]
+- [![Virtualbox][virtualbox.dev]][virtualbox-url]
 
 [mysql.dev]: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-X26-Y6XCd7mE8yEQlJfLuFVjf4qpU1FScA&usqp=CAU
 [mysql-url]: https://www.mysql.com/
 
-[flask.dev]: https://ih1.redbubble.net/image.2488655049.9084/st,small,75x75-pad,80x80,f8f8f8.jpg
+[flask.dev]: https://ih1.redbubble.net/image.2488655049.9084/st,small,500x300-pad,500x260,f8f8f8.jpg
 [flask-url]: https://flask.palletsprojects.com/en/2.2.x/
 
-image:
-![This ia an image](https://github.com/linoyh/Final-project-8200dev-course/blob/main/screenshots/Attendance-inwin-browser.JPG)
+[docker.dev]: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrGUFJhpy4r6Iw8PVYDrneZls6g0OmeLqlCQ&usqp=CAU
+[docker-url]: https://www.docker.com/
+
+[jenkins.dev]:  https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvX65F3kpwWIO8UfRf04tvffK6L1yGkK-i2A&usqp=CAU
+[jenkins-url]: https://www.jenkins.io/
+
+[aws.dev]: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-ptmmXio6-tLwOKTaw8wwvUDKS5TmK7mLLw&usqp=CAU
+[aws-url]: https://aws.amazon.com/
+
+[virtualbox.dev]: https://upload.wikimedia.org/wikipedia/commons/d/d5/Virtualbox_logo.png?20150209215936
+[virtualbox-url]: https://www.virtualbox.org/
 
 ## Technologies in use:
-- [![Flask][flask.dev]][flask-url]
+
 Docker, Virtualbox, Flask, Jenkins, AWS
-[flask.dev]: https://img.shields.io/badge/Flask-563D7C?style=for-the-badge&logo=flask&logoColor=white
-[flask-url]: https://flask.palletsprojects.com/en/2.2.x/
 
 ## Installation
 cd into the docker-compose direcory location and write the command:
@@ -62,3 +72,6 @@ copy final-project dir on the test or prod server via ssh by scp
 copy docker-compose.yaml file to machine final-project dir using scp
 ssh to the $machine (test ot prod) and bring the application up
 check if the current server is test. if does copy the test.sh script to the project dir and runs it
+
+image:
+![This ia an image](https://github.com/linoyh/Final-project-8200dev-course/blob/main/screenshots/Attendance-inwin-browser.JPG)
