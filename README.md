@@ -3,9 +3,25 @@
 The final project for 8200dev - bynet course is based on attendance applicaion I developed.
 Attendance is an app for calculate the Attendance time rates for the Devops 8200-dev-bynet course participants.
 
+### Built With
+
+- [![Mysql][mysql.dev]][mysql-url]
+- [![Flask][flask.dev]][flask-url]
+
+[mysql.dev]: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-X26-Y6XCd7mE8yEQlJfLuFVjf4qpU1FScA&usqp=CAU
+[mysql-url]: https://www.mysql.com/
+
+[flask.dev]: https://ih1.redbubble.net/image.2488655049.9084/st,small,75x75-pad,80x80,f8f8f8.jpg
+[flask-url]: https://flask.palletsprojects.com/en/2.2.x/
+
+image:
+![This ia an image](https://github.com/linoyh/Final-project-8200dev-course/blob/main/screenshots/Attendance-inwin-browser.JPG)
+
 ## Technologies in use:
+- [![Flask][flask.dev]][flask-url]
 Docker, Virtualbox, Flask, Jenkins, AWS
 [flask.dev]: https://img.shields.io/badge/Flask-563D7C?style=for-the-badge&logo=flask&logoColor=white
+[flask-url]: https://flask.palletsprojects.com/en/2.2.x/
 
 ## Installation
 cd into the docker-compose direcory location and write the command:
