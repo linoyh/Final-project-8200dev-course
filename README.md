@@ -1,10 +1,11 @@
 # Final Project - DevOps Bootcamp 
 
+The final project for 8200dev - bynet course is based on attendance applicaion I developed.
 Attendance is an app for calculate the Attendance time rates for the Devops 8200-dev-bynet course participants.
 
 ## Technologies in use:
-Docker, Virtualbox, Flask, Jenkins 
-
+Docker, Virtualbox, Flask, Jenkins, AWS
+[flask.dev]: https://img.shields.io/badge/Flask-563D7C?style=for-the-badge&logo=flask&logoColor=white
 
 ## Installation
 cd into the docker-compose direcory location and write the command:
