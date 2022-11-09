@@ -7,7 +7,6 @@ pipeline {
         dockerhub_credential = 'dockerhub'
         dockerImage = ''
         dockerTagImage = ''
-        github_credential = 'a0bb4e47-f112-4b84-9e36-1fb1d2239d7e'
         github_url = 'https://github.com/linoyh/Final-project-8200dev-course'
         jenkins_cerdentials_private_key = 'jenkins-ec2-server-credentials'
     }
@@ -15,9 +14,9 @@ pipeline {
         stage('Build BE Image') {
             steps {
                 script {
-                    //dockerImage = docker.build(dockerhub_registry:${env.BUILD_ID}, "./app")
-                    dockerImage = docker.build(dockerhub_registry + ":latest", "./app")
-                    dockerTagImage = docker.build(dockerhub_registry + ":${BUILD_NUMBER}", "./app")
+                    dockerImage = docker.build(dockerhub_registry + ":${BUILD_NUMBER}", "./app")
+                    dockerTagImage = docker.build(dockerhub_registry + ":latest", "./app")
+                    //name tag- build num and then latest
                 }
             }
         }
@@ -31,8 +30,6 @@ pipeline {
                     }
                 }
             }
-            //docker login
-            // docker push 6419/attendance_app_bynet:app-image
             stage('Push to dockerhub') {
                 steps {
                     script {
