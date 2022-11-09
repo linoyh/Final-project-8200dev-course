@@ -49,11 +49,5 @@ EOF
 
 echo "Deploying to $MACHINE server succedded"
 
-#check if the current server is test. if does run test.sh script on the test server
-#if [ $machine == "test" ]
-#then
-#  ssh -i "${SECRET_KEY}" -o StrictHostKeyChecking=no ec2-user@${machine} './test.sh'
-#elif
 
-#fi
 
