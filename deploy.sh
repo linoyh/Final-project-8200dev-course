@@ -40,9 +40,10 @@ scp -o StrictHostKeyChecking=no -r "$JENKINS_PIPELINE_WORKSPACE" ec2-user@${MACH
 #  docker-compose up --build -d
 #   docker rmi 6419/attendance_app_bynet:latest
 
-ssh -o StrictHostKeyChecking=no ec2-user@${MACHINE} << 'EOF'
+ssh -o -T StrictHostKeyChecking=no ec2-user@${MACHINE} << 'EOF'
   cp .env.py final-project-8200dev/
   cd /home/ec2-user/final-project-8200dev/
+  docker rmi 6419/attendance_app_bynet:latest
   docker pull 6419/attendance_app_bynet:latest
   docker-compose up --no-build -d
   sleep 20
