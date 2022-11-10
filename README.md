@@ -1,6 +1,6 @@
 # Final Project - DevOps Bootcamp 
 
-The final project for 8200dev - bynet course is based on attendance applicaion I developed.
+The final project for 8200dev - bynet course is based on attendance applicaion I developed (inEX4).
 Attendance is an app for calculate the Attendance time rates for the Devops 8200-dev-bynet course participants.
 
 
@@ -47,18 +47,18 @@ using special priviliged user to create attendance_csv table- contain all csv fi
 #### app
 created by docker file, build by it and defined in the docker-compose 
  
-####Main logics:
+#### Main logics:
 
 #### app.py
 activated by the docker file "CMD ["python3", "./app.py"]"
 
 attached to templates directory which contain index.html - our frontend to present the project nicely in the browser
 activate 3 scripts:
-####* sftp_csv.py- 
+#### sftp_csv.py- 
 takes all the csv files fron the remote course machine into the db container
-####* attendance.py-
+#### attendance.py-
 the main backend script - sum all attendance duration for identical users shown with differant names in all the csv files, calc the % of appearance for each user, write the final csv file to a db table.
-####* import_csv_to_db1.py - 
+#### import_csv_to_db1.py - 
 import the final csv file - the final result of the attendance script to the db
 
 
@@ -76,5 +76,4 @@ ssh to the $machine (test ot prod) and bring the application up
 check if the current server is test. if does, runs the test by curl to check if my applicetion is available
 
 #### screenshot of the application
-image:
 ![This ia an image](https://github.com/linoyh/Final-project-8200dev-course/blob/main/screenshots/Attendance-in-browser.JPG)
