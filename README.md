@@ -14,27 +14,21 @@ Attendance is an app for calculate the Attendance time rates for the Devops 8200
 - [![Virtualbox][virtualbox.dev]][virtualbox-url]
 
 [mysql.dev]:https://img.shields.io/badge/Mysql-DD0031?style=for-the-badge&logo=mysql&logoColor=white&color=orange
-#https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-X26-Y6XCd7mE8yEQlJfLuFVjf4qpU1FScA&usqp=CAU
 [mysql-url]: https://www.mysql.com/
 
 [flask.dev]: https://img.shields.io/badge/Flask-563D7C?style=for-the-badge&logo=flask&logoColor=white&color=black
-#https://ih1.redbubble.net/image.2488655049.9084/st,small,500x300-pad,500x260,f8f8f8.jpg
 [flask-url]: https://flask.palletsprojects.com/en/2.2.x/
 
 [docker.dev]: https://img.shields.io/badge/Docker-563D7C?style=for-the-badge&logo=docker&logoColor=white&color=9cf 
-#https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrGUFJhpy4r6Iw8PVYDrneZls6g0OmeLqlCQ&usqp=CAU
 [docker-url]: https://www.docker.com/
 
 [jenkins.dev]: https://img.shields.io/badge/Jenkins-563D7C?style=for-the-badge&logo=jenkins&logoColor=white&color=red
-#https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvX65F3kpwWIO8UfRf04tvffK6L1yGkK-i2A&usqp=CAU
 [jenkins-url]: https://www.jenkins.io/
 
 [aws.dev]: https://img.shields.io/badge/AWS-563D7C?style=for-the-badge&logo=amazon&logoColor=white&color=grey
-#https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-ptmmXio6-tLwOKTaw8wwvUDKS5TmK7mLLw&usqp=CAU
 [aws-url]: https://aws.amazon.com/
 
 [virtualbox.dev]: https://img.shields.io/badge/Virtualbox-563D7C?style=for-the-badge&logo=virtualbox&logoColor=white&color=blue
-#https://upload.wikimedia.org/wikipedia/commons/d/d5/Virtualbox_logo.png?20150209215936
 [virtualbox-url]: https://www.virtualbox.org/
 
 
@@ -45,7 +39,7 @@ docker-compose up --build
 
 ## preparation
 
-There are 2 docker containers in the project:
+####There are 2 docker containers in the project:
 #### mysqldb 
 pulled from docker hub by docker-compose.
 init.sql file do all the db quaries - create linoy_attendance db
@@ -53,6 +47,8 @@ using special priviliged user to create attendance_csv table- contain all csv fi
 #### app
 created by docker file, build by it and defined in the docker-compose 
  
+####Main logics:
+
 #### app.py
 activated by the docker file "CMD ["python3", "./app.py"]"
 

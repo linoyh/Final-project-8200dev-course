@@ -18,9 +18,6 @@ echo "Deploying to $machine starting"
 #copy final-project dir on the test or prod server by scp
 echo "copying final-project dir in $MACHINE machine"
 scp -o StrictHostKeyChecking=no -r "$JENKINS_PIPELINE_WORKSPACE" ec2-user@${MACHINE}:~
-#ssh -i "${SECRET_KEY}" -o StrictHostKeyChecking=no ec2-user@${machine} "mkdir -p ${HOME_DIR}/final-project-linoy-bynet"
-# ssh -i .ssh/jenkins-git -o StrictHostKeyChecking=no ec2-user@172.31.84.178 mkdir /home/ec2-user/final-project
-
 
 #ssh to the $machine (test ot prod):
 # copy the .env.py file (I created manually becuse I have not upload it to git) to the project dir
@@ -36,8 +33,7 @@ scp -o StrictHostKeyChecking=no -r "$JENKINS_PIPELINE_WORKSPACE" ec2-user@${MACH
 ssh -o StrictHostKeyChecking=no ec2-user@${MACHINE} << 'EOF'
   cp .env.py final-project-8200dev/
   cd /home/ec2-user/final-project-8200dev/
-  docker pull 6419/attendance_app_bynet:latest
-  docker-compose up --no-build -d
+  docker-compose up --build -d
   sleep 20
   if [ "$MACHINE" == "test" ];
   then
