@@ -29,24 +29,15 @@ scp -o StrictHostKeyChecking=no -r "$JENKINS_PIPELINE_WORKSPACE" ec2-user@${MACH
 #"cp .env.py final-project-8200dev/ && cd /home/ec2-user/final-project-8200dev/ && docker-compose up --build -d && curl http://127.0.0.1:5000"
 
 
-#Jeff
-#pull from dockerhub >> docker compose up --no_build
-#curl -f to find is is not 0 exit code > not complicate stuff
-#the echo goes to the ssh check -T ?
-
-
-#docker pull 6419/attendance_app_bynet:latest
-#docker-compose up --no-build -d
-#  docker-compose up --build -d
-#   docker rmi 6419/attendance_app_bynet:latest
-#docker pull 6419/attendance_app_bynet:latest
 #docker pull 6419/attendance_app_bynet:latest
 # docker-compose up --no-build -d
+#  docker-compose up --build -d
 
 ssh -o StrictHostKeyChecking=no ec2-user@${MACHINE} << 'EOF'
   cp .env.py final-project-8200dev/
   cd /home/ec2-user/final-project-8200dev/
-  docker-compose up --build -d
+  docker pull 6419/attendance_app_bynet:latest
+  docker-compose up --no-build -d
   sleep 20
   if [ "$MACHINE" == "test" ];
   then
@@ -63,8 +54,4 @@ EOF
 
 
 echo "Deploying to $MACHINE server succedded"
-
-#docker image prune container prune
-#prune on crontab
-#do not do cleanup in jenkins
 

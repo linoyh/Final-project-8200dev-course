@@ -3,35 +3,40 @@
 The final project for 8200dev - bynet course is based on attendance applicaion I developed.
 Attendance is an app for calculate the Attendance time rates for the Devops 8200-dev-bynet course participants.
 
-### Built With
-
-- [![Mysql][mysql.dev]][mysql-url]
-- [![Flask][flask.dev]][flask-url]
-- [![Dcker][docker.dev]][docker-url]
-- [![Aws][aws.dev]][aws-url]
-- [![Virtualbox][virtualbox.dev]][virtualbox-url]
-
-[mysql.dev]: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-X26-Y6XCd7mE8yEQlJfLuFVjf4qpU1FScA&usqp=CAU
-[mysql-url]: https://www.mysql.com/
-
-[flask.dev]: https://ih1.redbubble.net/image.2488655049.9084/st,small,500x300-pad,500x260,f8f8f8.jpg
-[flask-url]: https://flask.palletsprojects.com/en/2.2.x/
-
-[docker.dev]: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrGUFJhpy4r6Iw8PVYDrneZls6g0OmeLqlCQ&usqp=CAU
-[docker-url]: https://www.docker.com/
-
-[jenkins.dev]:  https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvX65F3kpwWIO8UfRf04tvffK6L1yGkK-i2A&usqp=CAU
-[jenkins-url]: https://www.jenkins.io/
-
-[aws.dev]: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-ptmmXio6-tLwOKTaw8wwvUDKS5TmK7mLLw&usqp=CAU
-[aws-url]: https://aws.amazon.com/
-
-[virtualbox.dev]: https://upload.wikimedia.org/wikipedia/commons/d/d5/Virtualbox_logo.png?20150209215936
-[virtualbox-url]: https://www.virtualbox.org/
 
 ## Technologies in use:
 
-Docker, Virtualbox, Flask, Jenkins, AWS
+- [![Mysql][mysql.dev]][mysql-url]
+- [![Flask][flask.dev]][flask-url]
+- [![Docker][docker.dev]][docker-url]
+- [![Jenkins][jenkins.dev]][jenkins-url]
+- [![Aws][aws.dev]][aws-url]
+- [![Virtualbox][virtualbox.dev]][virtualbox-url]
+
+[mysql.dev]:https://img.shields.io/badge/Mysql-DD0031?style=for-the-badge&logo=mysql&logoColor=white&color=orange
+#https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-X26-Y6XCd7mE8yEQlJfLuFVjf4qpU1FScA&usqp=CAU
+[mysql-url]: https://www.mysql.com/
+
+[flask.dev]: https://img.shields.io/badge/Flask-563D7C?style=for-the-badge&logo=flask&logoColor=white&color=black
+#https://ih1.redbubble.net/image.2488655049.9084/st,small,500x300-pad,500x260,f8f8f8.jpg
+[flask-url]: https://flask.palletsprojects.com/en/2.2.x/
+
+[docker.dev]: https://img.shields.io/badge/Docker-563D7C?style=for-the-badge&logo=docker&logoColor=white&color=9cf 
+#https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrGUFJhpy4r6Iw8PVYDrneZls6g0OmeLqlCQ&usqp=CAU
+[docker-url]: https://www.docker.com/
+
+[jenkins.dev]: https://img.shields.io/badge/Jenkins-563D7C?style=for-the-badge&logo=jenkins&logoColor=white&color=red
+#https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvX65F3kpwWIO8UfRf04tvffK6L1yGkK-i2A&usqp=CAU
+[jenkins-url]: https://www.jenkins.io/
+
+[aws.dev]: https://img.shields.io/badge/AWS-563D7C?style=for-the-badge&logo=amazon&logoColor=white&color=grey
+#https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-ptmmXio6-tLwOKTaw8wwvUDKS5TmK7mLLw&usqp=CAU
+[aws-url]: https://aws.amazon.com/
+
+[virtualbox.dev]: https://img.shields.io/badge/Virtualbox-563D7C?style=for-the-badge&logo=virtualbox&logoColor=white&color=blue
+#https://upload.wikimedia.org/wikipedia/commons/d/d5/Virtualbox_logo.png?20150209215936
+[virtualbox-url]: https://www.virtualbox.org/
+
 
 ## Installation
 cd into the docker-compose direcory location and write the command:
@@ -62,16 +67,18 @@ import the final csv file - the final result of the attendance script to the db
 
 
 #### .env file
-Contain  environment variables for all the scripts and logics 
+Contain environment variables for all the scripts and logics 
+The file is not uploaded to git hub so all my secrests will be saved
+It is cp to test &prod machines in the deploy.sh script
 
 #### deploy.sh 
 Usage: deploy.sh [test|prod]
 
 This script deploys the project to test and prod servers 
 copy final-project dir on the test or prod server via ssh by scp
-copy docker-compose.yaml file to machine final-project dir using scp
 ssh to the $machine (test ot prod) and bring the application up
-check if the current server is test. if does copy the test.sh script to the project dir and runs it
+check if the current server is test. if does, runs the test by curl to check if my applicetion is available
 
+#### screenshot of the application
 image:
-![This ia an image](https://github.com/linoyh/Final-project-8200dev-course/blob/main/screenshots/Attendance-inwin-browser.JPG)
+![This ia an image](https://github.com/linoyh/Final-project-8200dev-course/blob/main/screenshots/Attendance-in-browser.JPG)
