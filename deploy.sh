@@ -1,4 +1,5 @@
 #!/usr/bin/bash
+#-xe
 
 #  #  #  #  #  #  #  # #  #  #  #  #  #  #  # #  #  #  #  #  #  #  # #  #
 #this script deploy the final project into test and production servers  #
@@ -46,9 +47,6 @@ ssh -o StrictHostKeyChecking=no ec2-user@${MACHINE} << 'EOF'
   echo "Test succedded"
       else
   echo "Test failed"
-  ./cleanup
-  cd ..
-  sudo rm -rf final-project-8200dev/
       fi
   fi
 EOF
