@@ -9,7 +9,7 @@ services:
       - "5000:5000"
     working_dir: /app
     # defining the environmental environments for mysql
-    env_file: ./.env.py
+    env_file: ./.env
     # network link to db container
     #volumes: 
     #  - /csv_files_origin_offline:/app/csv_files_origin_offline 
@@ -21,7 +21,7 @@ services:
 
   db:
     image: mysql:latest
-    env_file: ./.env.py
+    env_file: ./.env
     ports:
       # <Port exposed> : < MySQL Port running inside container>
       - "3307:3306"

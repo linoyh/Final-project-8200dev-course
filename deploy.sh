@@ -31,6 +31,7 @@ scp -o StrictHostKeyChecking=no -r "$JENKINS_PIPELINE_WORKSPACE" ec2-user@${MACH
 # docker-compose up --no-build -d
 #  docker-compose up --build -d
 #  docker-compose up --build -d
+#  HTTP=`curl -I "http://127.0.0.1:5000"`
 
 ssh -o StrictHostKeyChecking=no ec2-user@${MACHINE} << 'EOF'
   cp .env.py final-project-8200dev/
