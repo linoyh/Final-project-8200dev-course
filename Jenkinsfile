@@ -16,11 +16,10 @@ pipeline {
                 script {
                     dockerImage = docker.build(dockerhub_registry + ":${BUILD_NUMBER}", "./app")
                     dockerTagImage = docker.build(dockerhub_registry + ":latest", "./app")
-                    //name tag- build num and then latest
                 }
             }
         }
-        stage('Deploy to Test') {
+        stage('Deploy To Test') {
             steps {
                 sshagent(credentials: [jenkins_cerdentials_private_key]) {
                     sh """
@@ -30,7 +29,7 @@ pipeline {
                     }
                 }
             }
-            stage('Push to dockerhub') {
+            stage('Push To Dockerhub') {
                 steps {
                     script {
                         docker.withRegistry( '', dockerhub_credential) {
@@ -40,7 +39,7 @@ pipeline {
                     }
                 }
             }
-            stage('Deploy to production') {
+            stage('Deploy To Production') {
             steps {
                 sshagent(credentials: [jenkins_cerdentials_private_key]) {
                     sh """
