@@ -31,27 +31,21 @@ scp -o StrictHostKeyChecking=no -r "$JENKINS_PIPELINE_WORKSPACE" ec2-user@${MACH
 # docker-compose up --no-build -d
 #  docker-compose up --build -d
 #  docker-compose up --build -d
-#  HTTP=`curl -I "http://127.0.0.1:5000"`
+#  #  HTTP=`curl -I "http://127.0.0.1:5000"`
 
-ssh -o StrictHostKeyChecking=no ec2-user@${MACHINE} << 'EOF'
-  cp .env.py final-project-8200dev/
-  cd /home/ec2-user/final-project-8200dev/
-  docker pull 6419/attendance_app_bynet:latest
-  docker-compose up --no-build -d
-  sleep 20
-  if [ "$MACHINE" == "test" ];
-  then
-      HTTP=`curl --write-out "%{http_code}\n" --silent --output /dev/null "http://127.0.0.1:5000"`
-      echo $HTTP
-      if [ "$HTTP" == "200" ];
-      then
-  echo "Test succedded"
-      else
-  echo "Test failed"
-      fi
-  fi
-EOF
+ssh -o StrictHostKeyChecking=no ec2-user@${MACHINE} "cp .env.py final-project-8200dev/ && cd /home/ec2-user/final-project-8200dev/ && docker pull 6419/attendance_app_bynet:latest && docker-compose up -d --no-build && sleep 30 && docker container ls -a"
 
+if [ "$MACHINE" == "test" ];
+then
+    echo "Testing"
+    ssh -o StrictHostKeyChecking=no ec2-user@${MACHINE} "HTTP=`curl --write-out "%{http_code}\n" --silent --output /dev/null "http://127.0.0.1:5000"` ;
+    if [ "$HTTP" == "200" ];
+    then
+      echo "Test succedded"
+    else
+      echo "Test failed"
+    fi"
+fi
 
 echo "Deploying to $MACHINE server succedded"
 
