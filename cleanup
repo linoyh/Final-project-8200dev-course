@@ -1,8 +1,7 @@
 #!/bin/bash
 
-docker-compose down
-docker container prune 
-docker image prune 
-docker volume prune 
-
+docker-compose down 
+&& docker volume prune -f && docker rmi 
+6419/attendance_app_bynet && cd .. && rm -rf 
+final-project-8200dev/
 
