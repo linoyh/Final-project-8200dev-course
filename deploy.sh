@@ -38,7 +38,7 @@ ssh -o StrictHostKeyChecking=no ec2-user@${MACHINE} "cp .env.py final-project-82
 if [ "$MACHINE" == "test" ];
 then
     #echo "Testing"
-    ssh -o StrictHostKeyChecking=no ec2-user@${MACHINE} "curl -I "http://127.0.0.1:5000"
+    ssh -o StrictHostKeyChecking=no ec2-user@${MACHINE} "curl -I "http://127.0.0.1:5000""
 fi
 
 echo "Deploying to $MACHINE server succedded"
