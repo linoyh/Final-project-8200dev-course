@@ -44,4 +44,4 @@ echo "Deploying to $MACHINE server succedded"
 
 echo "Stating cleanup in $MACHINE"
 # && docker rmi 6419/attendance_app_bynet 
-ssh -o StrictHostKeyChecking=no ec2-user@${MACHINE} "cd /home/ec2-user/final-project-8200dev/ && docker-compose down && docker volume prune -f && cd .. && rm -rf final-project-8200dev/"
+#ssh -o StrictHostKeyChecking=no ec2-user@${MACHINE} "cd /home/ec2-user/final-project-8200dev/ && docker-compose down && docker volume prune -f && cd .. && rm -rf final-project-8200dev/"
