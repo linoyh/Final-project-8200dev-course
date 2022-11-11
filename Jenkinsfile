@@ -33,7 +33,7 @@ pipeline {
                 steps {
                     script {
                         docker.withRegistry( '', dockerhub_credential) {
-                            dockerImage.push()
+                            //dockerImage.push()
                             dockerTagImage.push()
                         }
                     }

@@ -37,15 +37,12 @@ ssh -o StrictHostKeyChecking=no ec2-user@${MACHINE} "cp .env.py final-project-82
 
 if [ "$MACHINE" == "test" ];
 then
-    echo "Testing"
-    ssh -o StrictHostKeyChecking=no ec2-user@${MACHINE} "HTTP=`curl --write-out "%{http_code}\n" --silent --output /dev/null "http://127.0.0.1:5000"` ;
-    if [ "$HTTP" == "200" ];
-    then
-      echo "Test succedded"
-    else
-      echo "Test failed"
-    fi"
+    #echo "Testing"
+    ssh -o StrictHostKeyChecking=no ec2-user@${MACHINE} "curl -I "http://127.0.0.1:5000"
 fi
 
 echo "Deploying to $MACHINE server succedded"
 
+echo "Stating cleanup in $MACHINE"
+
+ssh -o StrictHostKeyChecking=no ec2-user@${MACHINE} "docker-compose down && docker volume prune -f && docker rmi 6419/attendance_app_bynet && cd .. && rm -rf final-project-8200dev/"
