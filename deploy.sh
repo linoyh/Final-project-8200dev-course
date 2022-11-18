@@ -36,7 +36,7 @@ fi
 
 echo "Deploying to $MACHINE server succedded"
 
-OLD_TAG= ($IMAGE_TAG -1)
+OLD_TAG=$((IMAGE_TAG-1))
 
 #cleanup the server- test / prod
 echo "Stating cleanup in $MACHINE"
