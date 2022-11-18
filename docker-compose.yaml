@@ -1,25 +1,30 @@
 ---
+#docker compose version
 version: '3.10'
 
+#The containers created
 services:
+  #The BE container contain all related main python scripts(SCP, import to DB, attendance, app (flask))
   app:
+    #The dockerfile location
     build: ./app
     ports:
-      #left- local server : right: flask expose port 5000 to cinnect flask from browser
+      #map the container to the host machine- left- local server : right- flask expose port 5000 to cinnect it from browser
       - "5000:5000"
+    #The dir where the application will run from inside the container
     working_dir: /app
     # defining the environmental environments for mysql
     env_file: ./.env
     # network link to db container
-    #volumes: 
-    #  - /csv_files_origin_offline:/app/csv_files_origin_offline 
     links:
       - db
     deploy:
+      #The app container will always restarts because the DB container takes time to be up
       restart_policy:
         condition: always
 
   db:
+    # The image pulled from docker hub
     image: mysql:latest
     env_file: ./.env
     ports:
