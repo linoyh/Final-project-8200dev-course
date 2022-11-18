@@ -14,8 +14,8 @@ pipeline {
         stage('Build BE Image') {
             steps {
                 script {
-                    //dockerImage = docker.build(dockerhub_registry + ":${BUILD_NUMBER}", "./app")
-                    dockerTagImage = docker.build(dockerhub_registry + ":latest", "./app")
+                    dockerImage = docker.build(dockerhub_registry + ":${BUILD_NUMBER}", "./app")
+                    //dockerTagImage = docker.build(dockerhub_registry + ":latest", "./app")
                 }
             }
         }
@@ -24,7 +24,7 @@ pipeline {
                 sshagent(credentials: [jenkins_cerdentials_private_key]) {
                     sh """
                         echo 'connecting to test server'
-                        bash -x deploy.sh test
+                        bash -x deploy.sh test ${BUILD_NUMBER}
                         """
                     }
                 }
@@ -33,7 +33,7 @@ pipeline {
                 steps {
                     script {
                         docker.withRegistry( '', dockerhub_credential) {
-                            dockerTagImage.push()
+                            dockerImage.push()
                         }
                     }
                 }
@@ -43,7 +43,7 @@ pipeline {
                 sshagent(credentials: [jenkins_cerdentials_private_key]) {
                     sh """
                         echo 'connecting to production server'
-                        bash -x deploy.sh production
+                        bash -x deploy.sh production ${BUILD_NUMBER}
                         """
                     }
                 }
