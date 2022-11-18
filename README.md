@@ -35,19 +35,65 @@ Attendance is an app for calculate the Attendance time rates for the Devops 8200
 [github.dev]:https://img.shields.io/badge/github-DD0031?style=for-the-badge&logo=github&logoColor=white&color=
 [github-url]: https://github.com/
 
-#### Docker
+## Installation
+cd into the docker-compose direcory location
+pull the latest image from docker hub
+
+run:
+docker-compose up -d
+
+* by default all the installation steps happen automatically by deploy.sh script which runs in the test and production steps in jenkinsfile
+
+## preparation
+
+#### There are 2 docker containers in the project:
+#### [![My Skills](https://skills.thijs.gg/icons?i=mysql&theme=light)](https://skills.thijs.gg) mysqldb 
+pulled from docker hub by docker-compose.
+init.sql file do all the db quaries - \
+create linoy_attendance db
+using special priviliged user to create attendance_csv table- contain all csv files from the course and final_attendance the main table which contain the proccessed data from the attendance.py script
+#### [![My Skills](https://skills.thijs.gg/icons?i=flask&theme=light)](https://skills.thijs.gg) app
+created by docker file, build by it and defined in the docker-compose. ruunind all main BE scripts and flask
+ 
+### Main scripts: 
+
+####  [![My Skills](https://skills.thijs.gg/icons?i=python&theme=light)](https://skills.thijs.gg) app.py 
+activated by the docker file "CMD ["python3", "./app.py"]"
+
+attached to templates directory which contain index.html - my frontend - to present the project nicely in the browser \
+Activate 3 scripts:
+####  [![My Skills](https://skills.thijs.gg/icons?i=python&theme=light)](https://skills.thijs.gg)  sftp_csv.py- 
+takes all the csv files fron the remote course machine into the db container
+####  [![My Skills](https://skills.thijs.gg/icons?i=python&theme=light)](https://skills.thijs.gg)  attendance.py-
+the main backend script - sum all attendance duration for identical users shown with differant names in all the csv files, calc the % of appearance for each user, write the final csv file to a db table.
+####  [![My Skills](https://skills.thijs.gg/icons?i=python&theme=light)](https://skills.thijs.gg)  import_csv_to_db1.py - 
+import the final csv file - the final result of the attendance script to the db
+
+#### [![My Skills](https://skills.thijs.gg/icons?i=bash&theme=light)](https://skills.thijs.gg) deploy.sh 
+Usage: deploy.sh [test|prod]
+
+This script deploys the project to test and prod servers \
+copy final-project dir on the test or prod server via ssh by scp \
+ssh to the $machine (test ot prod) and bring the application up by "docker-compose up -d --no-build" \
+check if the current server is test. if does, runs the test by curl to check if my applicetion is available
+
+###  Technologies Implementation
+#### Docker  [![My Skills](https://skills.thijs.gg/icons?i=docker&theme=light)](https://skills.thijs.gg)
+
 #### Dockerfile 
 appears inside the app directory and used to build the app container. 
 #### docker-compose.yaml
 appears inside main project directory and used to connect and bring up the app and DB containers
 
-#### AWS 
+#### AWS [![My Skills](https://skills.thijs.gg/icons?i=aws&theme=light)](https://skills.thijs.gg)
+
 I created 3 ec2 servers via amazon web services. 
 * Jenkins- The main server, running Jenkins pipeline to deploy the app on test and prod servers.
 * Test- runs the app via deploy.sh script and check wheather it is up.
 * Production- runs the application via deploy.sh if it passed the test stage
 
-#### Jenkins
+#### Jenkins [![My Skills](https://skills.thijs.gg/icons?i=jenkins&theme=light)](https://skills.thijs.gg)
+
 My CI/CD tool bulild my whole application. \
 First, do checkout to copy all my project directories from SCM (Git). \
 Then runs the jenkins pipeline with 4 stages:
@@ -61,54 +107,12 @@ Instead of using ssh -i <private key> in the deploy.sh script I am using the cre
 For the push and pull commands to dockerhub I created a docker hub token which is stored in jenkins credentials (dockerhub_credential var in the jenkinsfile)
  
 
-#### .env file
+#### .env file 
 Contain environment variables for all the scripts and logics 
 The file is not uploaded to git hub so all my secrests will be saved
 It is cp to test &prod machines in the deploy.sh script
 
 
-## Installation
-cd into the docker-compose direcory location
-pull the latest image from docker hub
-
-run:
-docker-compose up -d
-
-* by default all the installation steps happen automatically by deploy.sh script which runs in the test and production steps in jenkinsfile
-
-## preparation
-
-#### There are 2 docker containers in the project:
-#### mysqldb 
-pulled from docker hub by docker-compose.
-init.sql file do all the db quaries - \
-create linoy_attendance db
-using special priviliged user to create attendance_csv table- contain all csv files from the course and final_attendance the main table which contain the proccessed data from the attendance.py script
-#### app
-created by docker file, build by it and defined in the docker-compose 
- 
-### Main scripts:
-
-#### app.py
-activated by the docker file "CMD ["python3", "./app.py"]"
-
-attached to templates directory which contain index.html - my frontend - to present the project nicely in the browser \
-Activate 3 scripts:
-#### sftp_csv.py- 
-takes all the csv files fron the remote course machine into the db container
-#### attendance.py-
-the main backend script - sum all attendance duration for identical users shown with differant names in all the csv files, calc the % of appearance for each user, write the final csv file to a db table.
-#### import_csv_to_db1.py - 
-import the final csv file - the final result of the attendance script to the db
-
-#### deploy.sh 
-Usage: deploy.sh [test|prod]
-
-This script deploys the project to test and prod servers \
-copy final-project dir on the test or prod server via ssh by scp \
-ssh to the $machine (test ot prod) and bring the application up by "docker-compose up -d --no-build" \
-check if the current server is test. if does, runs the test by curl to check if my applicetion is available
-
-
 #### screenshot of the application
 ![This ia an image](https://github.com/linoyh/Final-project-8200dev-course/blob/main/screenshots/Attendance-in-browser.JPG)
+
