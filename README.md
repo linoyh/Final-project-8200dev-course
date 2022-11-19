@@ -77,6 +77,9 @@ copy final-project dir on the test or prod server via ssh by scp \
 ssh to the $machine (test ot prod) and bring the application up by "docker-compose up -d --no-build" \
 check if the current server is test. if does, runs the test by curl to check if my applicetion is available
 
+#### Project Scheme
+![This ia an image](https://github.com/linoyh/Final-project-8200dev-course/blob/main/screenshots/final-proj-scheme.JPG)
+
 ###  Technologies Implementation
 #### Docker  [![My Skills](https://skills.thijs.gg/icons?i=docker&theme=light)](https://skills.thijs.gg)
 
