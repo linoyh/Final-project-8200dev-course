@@ -48,7 +48,7 @@ def activate_sftp():
         print(os.environ['LOCAL_ORIGIN_DIR_PATH'])  # outputs 'newvalue'
 
         # Write changes to .env file.
-        dotenv.set_key("./.env.py", "LOCAL_ORIGIN_DIR_PATH", os.environ["LOCAL_ORIGIN_DIR_PATH"])
+        dotenv.set_key("./.env", "LOCAL_ORIGIN_DIR_PATH", os.environ["LOCAL_ORIGIN_DIR_PATH"])
 
 
 if __name__ == "__main__":

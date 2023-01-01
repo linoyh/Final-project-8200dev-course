@@ -21,7 +21,7 @@ echo "copying final-project dir in $MACHINE machine"
 scp -o StrictHostKeyChecking=no -r "$JENKINS_PIPELINE_WORKSPACE" ec2-user@${MACHINE}:~
 
 #ssh to the $machine (test ot prod):
-# copy the .env.py file (I created manually becuse I have not upload it to git) to the project dir
+# copy the .env file (I created manually becuse I have not upload it to git) to the project dir
 # pull docker image from docker hub
 # bring the application up
 
