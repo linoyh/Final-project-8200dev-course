@@ -25,7 +25,7 @@ scp -o StrictHostKeyChecking=no -r "$JENKINS_PIPELINE_WORKSPACE" ec2-user@${MACH
 # pull docker image from docker hub
 # bring the application up
 
-ssh -o StrictHostKeyChecking=no ec2-user@${MACHINE} "cp .env.py final-project-8200dev/ && cd /home/ec2-user/final-project-8200dev/ && docker pull 6419/attendance_app_bynet:latest && docker-compose up -d --no-build && sleep 80 && docker container ls -a"
+ssh -o StrictHostKeyChecking=no ec2-user@${MACHINE} "cp .env final-project-8200dev/ && cd /home/ec2-user/final-project-8200dev/ && docker pull 6419/attendance_app_bynet:latest && docker-compose up -d --no-build && sleep 80 && docker container ls -a"
 
 # check wether the server is test if does run the check statuss
 if [ "$MACHINE" == "test" ];
